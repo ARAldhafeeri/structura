@@ -39,51 +39,6 @@ export async function objToJSON(data, path){
     return path
 }
 
-/*
-export async function genNGjSON(tree){
-        let NODES = new Set();
-        const visted = new Set();
-        const uniqeParent = new Map();
-        const childParentID = new Map();
-        const UniqueNodes = [];
-        const LINKS = [];
-        for (const [k, v] of tree){
-            let parentID = v1()
-            if(!visted.has(v)){
-                uniqeParent.set(v, parentID)
-                UniqueNodes.push({
-                    label: v,
-                    id: parentID
-                })
-      
-                childParentID.set(k, parentID)
-            } else {
-                childParentID.set(k, uniqeParent.get(v))
-            }
-            visted.add(v)
-        }
-    
-        for (const [k, v] of tree){
-            let childID = v1()
-            UniqueNodes.push({
-                label: k,
-                id: childID
-            })
-            LINKS.push(
-                {
-                    from: childParentID.get(k),
-                    to: childID
-                }
-            )
-       }
-       NODES = Array.from(NODES)
-        return await [
-            UniqueNodes, 
-            LINKS
-       ]
-    }
-
-*/
 export async function genNGjSON(tree){
     /*
         convert directory map into network JSON format
