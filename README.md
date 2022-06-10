@@ -6,7 +6,7 @@ A tool which generate network graph given a directory path to help Software Engi
 
 # motivation :
 As software getting more larger and more complex, the challenge of debugging code and perform analysis on it becomes harder. This tool currently only visulize the **folder tree** in the near future, I have plans to visulize the following piority is visulizing imports first:
-     - support to visulize very very large codebase " currently, getting the network graph is very fast, but currently, can not visulize large codebase "
+     - suport extra large codebases, and enhance performance
      - tip delete all node_modules
      - imports
      - classes, function invoke
