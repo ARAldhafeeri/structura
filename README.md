@@ -16,7 +16,10 @@ A tool which generate network graph given a directory path to help Software Engi
             const savedDataFilePath = "do-not-change"
           // .. tests
        ```
-  - npm start
-  - go to localhost:3000/index.html
-  - Enjoy :)
+  - run tests " will run test and generate networkGraph.json, which is your directory network graph data ":
+    - npm test 
+  - start server and view visulization: 
+      - npm start
+      - go to localhost:3000/index.html
+      - Enjoy :)
 
