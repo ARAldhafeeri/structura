@@ -7,7 +7,6 @@ A tool which generate network graph given a directory path to help Software Engi
 # motivation :
 As software getting more larger and more complex, the challenge of debugging code and perform analysis on it becomes harder. This tool currently only visulize the **folder tree** in the near future, I have plans to visulize the following piority is visulizing imports first:
      - suport extra large codebases, and enhance performance
-     - tip delete all node_modules, do not visulize local git repository " copy folders else where " 
      - imports
      - classes, function invoke
      - do not know yet what else ... :)
@@ -33,5 +32,30 @@ As software getting more larger and more complex, the challenge of debugging cod
       - npm start
       - go to localhost:3000/index.html
       - Enjoy :)
-
-important note: **this tool does not support very very very large codebase yet, so run at your own responsiblity**
+ - tip for larger codebases:
+   - disable physics:
+     ```HTML
+      var options = {
+              layout: {
+                hierarchical: {
+                  direction: "UD",
+                  sortMethod: "directed",
+                },
+              },
+              interaction: { dragNodes: false },
+              physics: {
+                enabled: false,
+              },
+              configure: {
+                filter: function (option, path) {
+                  if (path.indexOf("hierarchical") !== -1) {
+                    return true;
+                  }
+                  return false;
+                },
+                showButton: false,
+              },
+            };
+            var network = new vis.Network(container, data, options);
+     ```
+important note: **this tool does not support very  large codebase yet, so run at your own responsiblity**
