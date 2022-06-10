@@ -58,4 +58,3 @@ As software getting more larger and more complex, the challenge of debugging cod
             };
             var network = new vis.Network(container, data, options);
      ```
-important note: **this tool does not support very  large codebase yet, so run at your own responsiblity**
