@@ -2,12 +2,12 @@
 A tool which generate network graph given a directory path to help Software Engineers to perform analysis on large codebases. The visulization is decently fast. 
 
 # quick demo " visulizing a side project " :
-  
+ 
 
 # motivation :
 As software getting more larger and more complex, the challenge of debugging code and perform analysis on it becomes harder. This tool currently only visulize the **folder tree** in the near future, I have plans to visulize the following piority is visulizing imports first:
      - suport extra large codebases, and enhance performance
-     - tip delete all node_modules
+     - tip delete all node_modules, do not visulize local git repository " copy folders else where " 
      - imports
      - classes, function invoke
      - do not know yet what else ... :)
