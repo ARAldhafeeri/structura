@@ -2,7 +2,7 @@
 A tool which generate network graph given a directory path to help Software Engineers to perform analysis on large codebases. The visulization is decently fast. 
 
 # quick demo " visulizing a side project " :
- 
+ https://github.com/ARAldhafeeri/structura/blob/main/vis.mp4
 
 # motivation :
 As software getting more larger and more complex, the challenge of debugging code and perform analysis on it becomes harder. This tool currently only visulize the **folder tree** in the near future, I have plans to visulize the following piority is visulizing imports first:
