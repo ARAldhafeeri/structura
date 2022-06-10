@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Network</title>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"
+    ></script>
+    <style type="text/css">
+      #mynetwork {
+        width: 1000px;
+        height: 1000px;
+        border: 1px solid lightgray;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mynetwork"></div>
+    <script type="text/javascript">
+      // create an array with nodes
+        var data;
+        async function fetchData() {
+            const res = await fetch('http://localhost:3000/ng');
+            const  data = await res.json()
+            return data;
+        }
+        fetchData().then( res => {
+            const [n,e] = res;
+
+            var nodes = new vis.DataSet(n);
+
+            // create an array with edges
+            var edges = new vis.DataSet(e);
+
+            // create a network
+            var container = document.getElementById("mynetwork");
+            var data = {
+                nodes: nodes,
+                edges: edges,
+            };
+            var options = {};
+            var network = new vis.Network(container, data, options);
+        })
+    </script>
+  </body>
+</html>
