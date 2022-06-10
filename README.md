@@ -19,6 +19,7 @@ As software getting more larger and more complex, the challenge of debugging cod
           npm install
       ```
 # visulize your source code:
+  - delete networkGraph.json
   - in /tests/network.graph.test , change the following
     -  ```JavaScript
           // ... imports
