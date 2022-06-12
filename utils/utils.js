@@ -39,13 +39,11 @@ export async function objToJSON(data, path){
     return path
 }
 
-export async function genNGjSON(tree){
+export async function genNGjSONVisJS(tree){
     /*
         convert directory map into network JSON format
         for more info check network-graph-json-format.md
     */
-
-
     const visted = new Set();
     const uniqueNodeID = new Map();
     const nodes = [];
@@ -56,7 +54,8 @@ export async function genNGjSON(tree){
             uniqueNodeID.set(v, pID)
             nodes.push({
                 label: v,
-                id: pID
+                id: pID,
+                group: "directory"
             })
             visted.add(v)
         } 
@@ -66,7 +65,8 @@ export async function genNGjSON(tree){
             uniqueNodeID.set(k,cID)
             nodes.push({
                 label: k,
-                id: cID
+                id: cID,
+                group: "file"
             })
             visted.add(k)
         }
@@ -81,6 +81,49 @@ export async function genNGjSON(tree){
     return await [nodes, edges]
 }
 
+
+export async function genNGjSON3d(tree){
+    /*
+        convert directory map into network JSON format
+        for more info check network-graph-json-format.md
+    */
+    const visted = new Set();
+    const uniqueNodeID = new Map();
+    const nodes = [];
+    const edges = [];
+    for (const [k, v] of tree){
+        if (!visted.has(v)){
+            const pID = v1()
+            uniqueNodeID.set(v, pID)
+            nodes.push({
+                title: v,
+                id: pID,
+                group: "directory"
+            })
+            visted.add(v)
+        } 
+    
+        if (!visted.has(k)){
+            const cID = v1()
+            uniqueNodeID.set(k,cID)
+            nodes.push({
+                title: k,
+                id: cID,
+                group: "file"
+            })
+            visted.add(k)
+        }
+        edges.push(
+            {
+                source: uniqueNodeID.get(v) ,
+                target: uniqueNodeID.get(k)
+            }
+        )
+    }
+
+    return await {nodes: nodes, links: edges}
+}
+
 export async function getDirectoryTree(dir){
     /*
         Walk through a directory recursively, assign D: to directory, F: to file, recieve file, empty map
@@ -93,11 +136,11 @@ export async function getDirectoryTree(dir){
 
                 let walk = path.join(dir, dirent.name)
                 await walkDir(walk)
-                tree.set(`D:${dirent.name}`,`D:${path.parse(dir).base}`)
+                tree.set(dirent.name, path.parse(dir).base)
             } else if (dirent.isFile()) {
 
                 // console.log(path.parse(dir))
-                tree.set(`F:${dirent.name}`,`D:${path.parse(dir).base}`)
+                tree.set(dirent.name, path.parse(dir).base)
 
             }
     
