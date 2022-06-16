@@ -38,7 +38,7 @@
                       "id": "unique_id_1",
                     },
                     {
-                      "name": "node 2",
+                      "title": "node 2",
                       # ...
                     }
               ],

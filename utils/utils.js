@@ -39,7 +39,9 @@ export async function objToJSON(data, path){
     return path
 }
 
-export async function genNGjSONVisJS(tree){
+
+
+export async function genNGjSON(tree, visType){
     /*
         convert directory map into network JSON format
         for more info check network-graph-json-format.md
@@ -48,12 +50,15 @@ export async function genNGjSONVisJS(tree){
     const uniqueNodeID = new Map();
     const nodes = [];
     const edges = [];
+    const nodeName = visType === "visJS" ? "label" : "title";
+    const edgeLinkOne =  visType === "visJS" ? "from" : "source";
+    const edgeLinkTwo =  visType === "visJS" ? "to" : "target";
     for (const [k, v] of tree){
         if (!visted.has(v)){
             const pID = v1()
             uniqueNodeID.set(v, pID)
             nodes.push({
-                label: v,
+                [nodeName]: v,
                 id: pID,
                 group: "directory"
             })
@@ -64,7 +69,7 @@ export async function genNGjSONVisJS(tree){
             const cID = v1()
             uniqueNodeID.set(k,cID)
             nodes.push({
-                label: k,
+                [nodeName]: k,
                 id: cID,
                 group: "file"
             })
@@ -72,56 +77,13 @@ export async function genNGjSONVisJS(tree){
         }
         edges.push(
             {
-                from: uniqueNodeID.get(v) ,
-                to: uniqueNodeID.get(k)
+                [edgeLinkOne]: uniqueNodeID.get(v) ,
+                [edgeLinkTwo]: uniqueNodeID.get(k)
             }
         )
     }
 
-    return await [nodes, edges]
-}
-
-
-export async function genNGjSON3d(tree){
-    /*
-        convert directory map into network JSON format
-        for more info check network-graph-json-format.md
-    */
-    const visted = new Set();
-    const uniqueNodeID = new Map();
-    const nodes = [];
-    const edges = [];
-    for (const [k, v] of tree){
-        if (!visted.has(v)){
-            const pID = v1()
-            uniqueNodeID.set(v, pID)
-            nodes.push({
-                title: v,
-                id: pID,
-                group: "directory"
-            })
-            visted.add(v)
-        } 
-    
-        if (!visted.has(k)){
-            const cID = v1()
-            uniqueNodeID.set(k,cID)
-            nodes.push({
-                title: k,
-                id: cID,
-                group: "file"
-            })
-            visted.add(k)
-        }
-        edges.push(
-            {
-                source: uniqueNodeID.get(v) ,
-                target: uniqueNodeID.get(k)
-            }
-        )
-    }
-
-    return await {nodes: nodes, links: edges}
+    return await {nodes: nodes, edges: edges}
 }
 
 export async function getDirectoryTree(dir){

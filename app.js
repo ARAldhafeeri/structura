@@ -1,4 +1,3 @@
-// import { jsonToObj } from "./utils/utils.js";
 import fs  from "fs";
 import express from "express";
 
@@ -8,13 +7,10 @@ app.use(express.static('public'))
 
 app.get('/ng', async (req, res) => {
     const savedDataFilePath = "./public/data/networkGraphVisjs.json"
-    // slow 
-    // const data = await jsonToObj(savedDataFilePath)
-    // res.json(data)
+
     const fileStream = fs.createReadStream(savedDataFilePath, 'utf8');
     fileStream.on('open', () => {
-        // read, write data in chuncks !
-        fileStream.pipe(res) // push from read stream into write stream
+        fileStream.pipe(res)
     })
 
     fileStream.on('error', (err)=> {

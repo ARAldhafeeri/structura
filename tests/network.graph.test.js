@@ -1,4 +1,4 @@
-import {getDirectoryTree, objToJSON, jsonToObj, genNGjSON3d, genNGjSONVisJS } from "../utils/utils";
+import {getDirectoryTree, objToJSON, genNGjSON } from "../utils/utils";
 import assert from 'node:assert/strict';
 import {stat} from "fs";
 
@@ -9,9 +9,8 @@ const savedDataFilePathVisjs = "./public/data/networkGraphVisjs.json"
 
 test("takes folder link and output json in specific format for 3dJS", async () => {
     const tree = await getDirectoryTree(dir);
-    const data = await genNGjSON3d(tree);
+    const data = await genNGjSON(tree);
     const outputFile = await objToJSON(data, savedDataFilePath3D)
-    console.log(outputFile)
     stat(outputFile, (err, stats) => {
         assert.deepEqual(stats.isFile(), true)
     })
@@ -21,9 +20,8 @@ test("takes folder link and output json in specific format for 3dJS", async () =
 
 test("takes folder link and output json in specific format for visJS", async () => {
     const tree = await getDirectoryTree(dir);
-    const data = await genNGjSONVisJS(tree);
+    const data = await genNGjSON(tree);
     const outputFile = await objToJSON(data, savedDataFilePathVisjs)
-    console.log(outputFile)
     stat(outputFile, (err, stats) => {
         assert.deepEqual(stats.isFile(), true)
     })
@@ -31,8 +29,8 @@ test("takes folder link and output json in specific format for visJS", async () 
 })
 
 test("check network graph follow specific format for vis.js", async () => {
-    const data = await genNGjSONVisJS(savedDataFilePathVisjs)
-    const [nodes, edges] = data
+    const data = await genNGjSON(savedDataFilePathVisjs, "visJS")
+    const {nodes, edges} = data
     assert.deepEqual(typeof nodes, 'object' )
     assert.deepEqual(typeof edges, 'object' )
     assert.deepEqual(Object.keys(edges[0]), ['from', 'to'])
@@ -42,11 +40,11 @@ test("check network graph follow specific format for vis.js", async () => {
 })
 
 test("check network graph follow specific format for 3dJS", async () => {
-    const data = await genNGjSON3d(savedDataFilePath3D)
-    const {nodes, links} = data
+    const data = await genNGjSON(savedDataFilePath3D, "3d")
+    const {nodes, edges} = data
     assert.deepEqual(typeof nodes, 'object' )
-    assert.deepEqual(typeof links, 'object' )
-    assert.deepEqual(Object.keys(links[0]), ['source', 'target'])
+    assert.deepEqual(typeof edges, 'object' )
+    assert.deepEqual(Object.keys(edges[0]), ['source', 'target'])
     assert.deepEqual(Object.keys(nodes[0]), ['title', 'id', 'group'])
 
        
