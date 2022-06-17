@@ -60,7 +60,7 @@ export async function genNGjSON(tree, visType){
             nodes.push({
                 [nodeName]: v,
                 id: pID,
-                group: "directory"
+                group: 1
             })
             visted.add(v)
         } 
@@ -71,7 +71,7 @@ export async function genNGjSON(tree, visType){
             nodes.push({
                 [nodeName]: k,
                 id: cID,
-                group: "file"
+                group: 2
             })
             visted.add(k)
         }

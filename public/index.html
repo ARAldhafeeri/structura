@@ -8,54 +8,45 @@
     ></script> -->
     <style type="text/css">
       body {
-        background-color: #121212;
+        background-color: #333;
       }
-      #graphic {
-        width: 100%;
-        height: 2000px;
-        background-color: 1px solid red;
+      html{ width: 100%; }
+      .link {
+        fill: none;
+        stroke: #666;
+        stroke-width: 1.5px;
       }
+
+      #licensing {
+        fill: green;
+      }
+
+      .link.licensing {
+        stroke: green;
+      }
+
+      .link.resolved {
+        stroke-dasharray: 0,2 1;
+      }
+
+      circle {
+        fill: #ccc;
+        stroke: #333;
+        stroke-width: 1.5px;
+      }
+
+      text {
+        font: 10px sans-serif;
+        pointer-events: none;
+        text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 -1px 0 #fff, -1px 0 0 #fff;
+      }
+
     </style>
   </head>
   <body>
-    <div id="graphic"></div>
-    <svg width="3000" height="3000"></svg>
-    <script src="//unpkg.com/3d-force-graph"></script>
-  
-    </script>
-    <!-- visjs -->
-    <!-- <div id="mynetwork"></div> -->
-    <!-- <script type="text/javascript">
-      // create an array with nodes
-        var data;
-        async function fetchData() {
-            const res = await fetch('http://localhost:3000/ng');
-            const  data = await res.json()
-            return data;
-        }
-        fetchData().then( res => {
-            console.log(res)
-            const [n,e] = res;
-
-            var nodes = new vis.DataSet(n);
-
-            // create an array with edges
-            var edges = new vis.DataSet(e);
-
-            // create a network
-            var container = document.getElementById("mynetwork");
-            var data = {
-                nodes: nodes,
-                edges: edges,
-                groups: {
-                    directory: {color:{background:'red'}},
-                    file: {color:"rgb(165,255,201)"}
-                  },
-
-            };
-            var options = {};
-            var network = new vis.Network(container, data, options);
-        })
-    </script> -->
+    <svg width="960" height="600"></svg>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <!-- Create a div where the graph will take place -->
+    <script src="vis.js"></script>
   </body>
 </html>

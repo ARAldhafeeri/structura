@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {stat} from "fs";
 
 
-const dir = 'C:/Projects/saudi-eye-poc/'
+const dir = 'C:/Projects/'
 const savedDataFilePath3D = "./public/data/networkGraph3d.json"
 const savedDataFilePathVisjs = "./public/data/networkGraphVisjs.json"
 
