@@ -6,10 +6,10 @@ A tool which generate network graph given a directory path to help Software Engi
 
 # motivation :
 As software getting more larger and more complex, the challenge of debugging code and perform analysis on it becomes harder. This tool currently only visulize the **folder tree** in the near future, I have plans to visulize the following piority is visulizing imports first:
-     - suport extra large codebases, and enhance performance
-     - imports
-     - classes, function invoke
-     - do not know yet what else ... :)
+     - You can vis network graph with up to 100k nodes, 100k edges using public/vis.js
+     next: 
+     - tree interactive graph for folder structure
+     - arc relation between files based on imports for NodeJS
 
 # run locally 
 - install nodeJS
