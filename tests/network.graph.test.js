@@ -1,13 +1,14 @@
-import {getDirectoryTree, objToJSON, genNGjSON } from "../utils/utils";
+import {getDirectoryTree, objToJSON, genNGjSON, genTreeGraph } from "../utils/utils";
 import assert from 'node:assert/strict';
 import {stat} from "fs";
 
 
-const dir = 'C:/Projects/'
+const dir = 'C:/Projects/Saudi-Eye-poc'
 const savedDataFilePath3D = "./public/data/networkGraph3d.json"
 const savedDataFilePathVisjs = "./public/data/networkGraphVisjs.json"
+const savedDataFilePath3DTree = "./public/data/TreeGraph3d.json"
 
-test("takes folder link and output json in specific format for 3dJS", async () => {
+test("takes folder link and output json in specific format for 3dJS network graph", async () => {
     const tree = await getDirectoryTree(dir);
     const data = await genNGjSON(tree);
     const outputFile = await objToJSON(data, savedDataFilePath3D)
@@ -17,8 +18,18 @@ test("takes folder link and output json in specific format for 3dJS", async () =
        
 })
 
+test("takes folder link and output json in specific format for 3dJS tree graph", async () => {
+    const tree = await getDirectoryTree(dir);
+    const data = await genTreeGraph(tree);
+    const outputFile = await objToJSON(data, savedDataFilePath3DTree)
+    stat(outputFile, (err, stats) => {
+        assert.deepEqual(stats.isFile(), true)
+    })
+       
+})
 
-test("takes folder link and output json in specific format for visJS", async () => {
+
+test("takes folder link and output json in specific format for visJS network graph", async () => {
     const tree = await getDirectoryTree(dir);
     const data = await genNGjSON(tree);
     const outputFile = await objToJSON(data, savedDataFilePathVisjs)
@@ -49,3 +60,5 @@ test("check network graph follow specific format for 3dJS", async () => {
 
        
 })
+
+

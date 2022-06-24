@@ -53,3 +53,26 @@
               ]
             }
       ```
+
+- labeled nodes network graph 3d
+
+      ```JSON
+            {
+                "name": "Top Level",
+                "id": "uuid.v4()"
+                "children": [
+                  { 
+                    "name": "Level 2: A",
+                    "id": "uuid.v4()",
+                    "children": [
+                      { "name": "Son of A" },
+                      { "name": "Daughter of A" }
+                    ]
+                  },
+                  { 
+                    "name": "Level 2: B", 
+                    "id": "uuid.v4()",
+                  }
+                ]
+              };
+      ```

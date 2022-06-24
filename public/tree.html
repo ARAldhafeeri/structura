@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>tree</title>
+    <style type="text/css">
+      body {
+        background-color: #333;
+      }
+      html{ width: 100%; }
+      .link {
+        fill: none;
+        stroke: #666;
+        stroke-width: 1.5px;
+      }
+
+      #licensing {
+        fill: green;
+      }
+
+      .link.licensing {
+        stroke: green;
+      }
+
+      .link.resolved {
+        stroke-dasharray: 0,2 1;
+      }
+
+      .text {
+        font-size: 15px;
+        color: antiquewhite!important;
+        font-family: "Saira";
+
+      }
+
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Saira">
+  </head>
+  <body>
+    <svg></svg>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <!-- Create a div where the graph will take place -->
+    <script src="tree.js"></script>
+  </body>
+</html>
