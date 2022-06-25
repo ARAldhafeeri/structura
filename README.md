@@ -1,15 +1,12 @@
 # structura
-A tool which generate network graph given a directory path to help Software Engineers to perform analysis on large codebases. The visulization is decently fast. 
+A tool which generate graph represnetation of the codebase given a directory path to help Software Engineers to perform analysis on large codebases. The visulization algorithm is fastest for the use case. 
 
 # quick demo " visulizing a side project " :
-[ https://github.com/ARAldhafeeri/structura/blob/main/vis.mp4](https://github.com/ARAldhafeeri/structura/blob/main/structura%20(2).mp4)
+https://www.linkedin.com/feed/update/urn:li:activity:6946278434406834176/
 
 # motivation :
 As software getting more larger and more complex, the challenge of debugging code and perform analysis on it becomes harder. This tool currently only visulize the **folder tree** in the near future, I have plans to visulize the following piority is visulizing imports first:
-     - You can vis network graph with up to 100k nodes, 100k edges using public/vis.js
-     next: 
-     - tree interactive graph for folder structure
-     - arc relation between files based on imports for NodeJS
+     - You can visulize very large number of nodes, edges, trees depth.
 
 # run locally 
 - install nodeJS
@@ -31,31 +28,6 @@ As software getting more larger and more complex, the challenge of debugging cod
     - npm test 
   - start server and view visulization: 
       - npm start
-      - go to localhost:3000/index.html
+      - go to localhost:3000/tree.html
       - Enjoy :)
- - tip for larger codebases:
-   - disable physics:
-     ```HTML
-      var options = {
-              layout: {
-                hierarchical: {
-                  direction: "UD",
-                  sortMethod: "directed",
-                },
-              },
-              interaction: { dragNodes: false },
-              physics: {
-                enabled: false,
-              },
-              configure: {
-                filter: function (option, path) {
-                  if (path.indexOf("hierarchical") !== -1) {
-                    return true;
-                  }
-                  return false;
-                },
-                showButton: false,
-              },
-            };
-            var network = new vis.Network(container, data, options);
-     ```
+ 
