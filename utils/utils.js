@@ -64,7 +64,7 @@ export async function genNGjSON(tree, visType){
             const pID = v1()
             uniqueNodeID.set(v, pID)
             nodes.push({
-                [nodeName]: v,
+                [nodeName]: cleanName(v),
                 id: pID,
                 group: 1
             })
@@ -75,7 +75,7 @@ export async function genNGjSON(tree, visType){
             const cID = v1()
             uniqueNodeID.set(k,cID)
             nodes.push({
-                [nodeName]: k,
+                [nodeName]: cleanName(k),
                 id: cID,
                 group: 2
             })
@@ -99,11 +99,16 @@ export async function genNGjSON(tree, visType){
   */
 
 function cleanName(nodeName){
-    return nodeName.includes("F:") ? nodeName.replace("F:", "") : nodeName.replace("D:", "")
+    if (!nodeName) return 
+    return nodeName.includes("F:") ? parsePath(nodeName.replace("F:", "")) : parsePath(nodeName.replace("D:", ""));
 }
 
 function getIcon(nodeName){
     return nodeName.includes("D:") ? "./data/folder.png" : "./data/file.png";
+}
+
+function parsePath(pathName){
+    return path.parse(pathName).base;
 }
 
 async function insertNodeDeepNestedTree(nestedTree, parentID, childID, parentName, childName){
@@ -126,7 +131,7 @@ async function insertNodeDeepNestedTree(nestedTree, parentID, childID, parentNam
         )
     } 
 
-    const walkObject = function (childreen){
+     function walkObject(childreen){
         for (let i = 0;  i < childreen.length; i++){
             let ancestor = childreen[i];
             if (ancestor.id === parentID) {
@@ -213,12 +218,12 @@ export async function getDirectoryTree(dir){
 
             if ( dirent.isDirectory() ){
 
-                let walk = path.join(dir, dirent.name)
-                tree.set(`D:${dirent.name}`, `D:${path.parse(dir).base}`)
-                await walkDir(walk)
+                let walkThisDir = path.join(dir, dirent.name)
+                await tree.set(`D:${walkThisDir}`, `D:${dir}`)
+                await walkDir(walkThisDir)
             } else if (dirent.isFile()) {
-
-                tree.set(`F:${dirent.name}`, `D:${path.parse(dir).base}`)
+                let absoultePath = path.join(dir, dirent.name)
+                await tree.set(`F:${absoultePath}`, `D:${dir}`)
 
             }
     
@@ -227,5 +232,7 @@ export async function getDirectoryTree(dir){
     }
 
     await walkDir(dir)
+    console.log(tree)
     return tree
 }
+
